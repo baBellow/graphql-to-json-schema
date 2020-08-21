@@ -10,6 +10,7 @@ import {
     isIntrospectionInputValue,
     isIntrospectionListTypeRef,
     isIntrospectionObjectType,
+    isIntrospectionInterfaceType,
     isNonNullIntrospectionType,
     isIntrospectionScalarType,
     isIntrospectionDefaultScalarType
@@ -95,7 +96,7 @@ export const introspectionTypeReducer:
             definitionsIntrospectionFieldReducer :
             propertiesIntrospectionFieldReducer;
 
-        if (isIntrospectionObjectType(curr)) {
+        if (isIntrospectionObjectType(curr) || isIntrospectionInterfaceType(curr)) {
             acc[curr.name] = {
                 type: 'object',
                 properties: reduce<IntrospectionFieldReducerItem, JSONSchema6Acc>(
